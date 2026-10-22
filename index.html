@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#111d31">
+    <meta name="description" content="Laboratorios virtuales, simuladores y rutas de aprendizaje del IESTP-ESPINAR.">
+    <title>IESTP-ESPINAR | Laboratorios virtuales</title>
+    <link rel="icon" href="logo-iestp (1).png">
+    <link rel="stylesheet" href="css/estilos.css">
+    <script type="module" src="js/fondo-tecnologico.js"></script>
+    <script type="module" src="js/app.js"></script>
+  </head>
+  <body>
+    
+    <canvas id="tech-background" aria-hidden="true"></canvas>
+    <main class="login-gate" id="login-gate">
+      <section class="gate-access">
+        <header class="gate-institution" aria-label="Instituto de Educación Superior Tecnológico Público Espinar">
+          <div class="institution-brand">
+            <img src="logo-iestp (1).png" alt="Escudo circular del IESTP-ESPINAR">
+            <strong>Instituto de Educación Superior Tecnológico Público - "Espinar"</strong>
+          </div>
+          <p class="institution-motto">Conocimiento que inspira, profesionales que transforman.</p>
+          <p class="institution-eyebrow">Portal de laboratorios</p>
+          <h1>Sistema de<br>Laboratorios Virtuales</h1>
+          <p class="institution-description">Accede a simuladores y recursos didácticos para fortalecer tu formación técnica.</p>
+          <div class="institution-access"><span aria-hidden="true">✓</span> Acceso para estudiantes y personal autorizado</div>
+        </header>
+        <div class="gate-card">
+          <div class="login-mark" aria-hidden="true">LAB</div>
+          <h2 class="gate-title">Iniciar sesión</h2>
+          <p class="gate-subtitle">Ingresa tu usuario y contraseña de demostración para continuar.</p>
+          <form id="gate-form" class="gate-form" method="post">
+            <label class="field" id="identity-label" for="gate-identity">DNI o usuario</label>
+            <span class="gate-input-wrap"><input id="gate-identity" name="identity" autocomplete="username" maxlength="60" placeholder="Escribe tu DNI o usuario" required></span>
+            <label class="field" for="gate-password">Contraseña</label>
+            <span class="gate-input-wrap"><input id="gate-password" name="password" type="password" autocomplete="current-password" placeholder="Escribe tu contraseña" required><button class="password-toggle" id="password-toggle" type="button" aria-label="Mostrar contraseña" aria-pressed="false">◉</button></span>
+            <div class="gate-options">
+              <label class="remember-option"><input id="remember-identity" type="checkbox"><span>Recordarme</span></label>
+            </div>
+            <button class="button button-dark gate-submit" type="submit">Ingresar al sistema <span aria-hidden="true">→</span></button>
+          </form>
+          <p class="gate-signup">¿No tienes acceso? Comunícate con el <a href="https://iestpespinar.edu.pe/" target="_blank" rel="noreferrer">área de administración</a>.</p>
+          <div class="role-selector" aria-label="Cambiar tipo de acceso" hidden>
+            <button class="role-option" type="button" data-role="admin">Ingresar como administrador</button>
+            <button class="role-option" type="button" data-role="student" hidden>Volver al acceso de estudiante</button>
+          </div>
+          <p class="gate-note" hidden>El ingreso institucional todavía no está conectado. Usa solo datos ficticios; no escribas contraseñas personales.</p>
+          <div class="gate-footer"><span aria-hidden="true">●</span> Laboratorios Virtuales · IESTP-ESPINAR</div>
+        </div>
+      </section>
+    </main>
+    <main class="local-server-guide" id="local-server-guide" hidden>
+      <section class="error-card">
+        <span class="eyebrow">Falta iniciar el servidor local</span>
+        <h1>No abras este archivo directamente</h1>
+        <p>El navegador muestra una ruta del disco (<code>file://</code>). En ese modo bloquea los módulos y las vistas que necesita el portal; por eso el botón de acceso no puede iniciar la sesión.</p>
+        <h2>Para abrirlo en Chrome o Edge</h2>
+        <ol>
+          <li>Abre esta carpeta del proyecto en Visual Studio Code e inicia tu servidor local, por ejemplo con <strong>Go Live</strong>.</li>
+          <li>Abre la dirección HTTP que indique el servidor, como <code>http://localhost:5500</code>. No uses la ruta que termina en <code>index.html</code> desde el disco.</li>
+        </ol>
+        <p>También puedes abrir PowerShell en la carpeta del proyecto, ejecutar <code>py -m http.server 8000</code> y visitar <code>http://localhost:8000</code>.</p>
+      </section>
+    </main>
+    <div class="app-shell" id="app-shell" hidden>
+      <aside class="sidebar" id="sidebar">
+        <a class="brand" href="#inicio" aria-label="Ir al inicio de IESTP-ESPINAR">
+          <img src="logo-iestp (1).png" alt="Escudo circular del IESTP-ESPINAR" class="brand-logo">
+          <span><strong>IESTP-ESPINAR</strong><small>Laboratorios virtuales</small></span>
+        </a>
+        <div class="sidebar-label">Espacios de aprendizaje</div>
+        <nav class="main-nav" aria-label="Navegación principal">
+          <a href="#inicio" data-route="inicio" class="nav-link">
+            <span class="nav-icon">⌂</span><span>Inicio</span>
+          </a>
+          <a href="#mineria" data-route="mineria" class="nav-link">
+            <span class="nav-icon">⛏</span><span>Minería</span>
+          </a>
+          <a href="#agropecuaria" data-route="agropecuaria" class="nav-link">
+            <span class="nav-icon">◉</span><span>Agropecuaria</span>
+          </a>
+          <a href="#mecanica" data-route="mecanica" class="nav-link">
+            <span class="nav-icon">⚙</span><span>Mecánica</span>
+          </a>
+          <a href="#electronica" data-route="electronica" class="nav-link">
+            <span class="nav-icon">ϟ</span><span>Electrónica</span>
+          </a>
+          <a href="#apsti" data-route="apsti" class="nav-link">
+            <span class="nav-icon">⌘</span><span>APSTI</span>
+          </a>
+          <a href="#administracion" data-route="administracion" class="nav-link admin-nav-link" id="admin-nav-link" hidden>
+            <span class="nav-icon">▤</span><span>Administración</span>
+          </a>
+        </nav>
+        <div class="sidebar-note">
+          <span class="live-dot"></span>
+          <div><strong>Laboratorios educativos</strong><small>Prácticas interactivas</small></div>
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false">☰</button>
+          <div class="breadcrumb"><span>IESTP-ESPINAR</span><span class="breadcrumb-separator">/</span><strong id="page-title">Inicio</strong></div>
+          <div class="topbar-actions">
+            <span class="session-identity" id="session-identity"></span>
+            <button class="logout-trigger" id="logout-trigger" type="button">Salir</button>
+            <a class="topbar-link" href="https://iestpespinar.edu.pe/" target="_blank" rel="noreferrer">Sitio institucional <span aria-hidden="true">↗</span></a>
+          </div>
+        </header>
+        <div id="app-view" class="content-area" aria-live="polite"></div>
+        <footer class="page-footer">
+          <span>Recurso educativo abierto · IESTP-ESPINAR</span>
+          <span>Los resultados son referenciales y simulados.</span>
+        </footer>
+      </main>
+    </div>
+    <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+    <script>
+      if (window.location.protocol === "file:") {
+        document.querySelector("#login-gate").hidden = true;
+        document.querySelector("#local-server-guide").hidden = false;
+      }
+    </script>
+  </body>
+</html>

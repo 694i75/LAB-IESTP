@@ -1,0 +1,95 @@
+<section class="module-heading">
+  <span class="eyebrow">Laboratorio 04 · Control básico</span>
+  <h1>Tablero de automatización</h1>
+  <p>Desarrolla prácticas de automatización, instrumentación analógica y análisis de circuitos eléctricos.</p>
+</section>
+<div class="practice-tabs" role="tablist" aria-label="Prácticas profesionales de Electrónica">
+  <button type="button" role="tab" id="electronics-tab-control" aria-controls="electronics-panel-control" aria-selected="true" class="selected" data-practice-tab="control">Lógica de control</button>
+  <button type="button" role="tab" id="electronics-tab-current" aria-controls="electronics-panel-current" aria-selected="false" data-practice-tab="current" tabindex="-1">Instrumentación 4–20 mA</button>
+  <button type="button" role="tab" id="electronics-tab-ohm" aria-controls="electronics-panel-ohm" aria-selected="false" data-practice-tab="ohm" tabindex="-1">Análisis de circuito</button>
+  <button type="button" role="tab" id="electronics-tab-components" aria-controls="electronics-panel-components" aria-selected="false" data-practice-tab="components" tabindex="-1">Componentes y práctica</button>
+</div>
+<section class="practice-panel" id="electronics-panel-control" role="tabpanel" aria-labelledby="electronics-tab-control" data-practice-panel="control">
+<div class="workspace-grid">
+  <div>
+    <section class="panel">
+      <div class="panel-heading"><div><h2>Entradas del sistema</h2><p>Activa los interruptores para probar la lógica.</p></div><span class="panel-tag">24 V DC · SIMULADO</span></div>
+      <div class="toggle-row"><div class="toggle-label"><strong>Interruptor principal</strong><small>Habilita el circuito de control</small></div><button class="switch" type="button" role="switch" aria-checked="false" data-input="power" aria-label="Interruptor principal"></button></div>
+      <div class="toggle-row"><div class="toggle-label"><strong>Sensor de nivel</strong><small>Indica nivel suficiente en el depósito</small></div><button class="switch" type="button" role="switch" aria-checked="false" data-input="level" aria-label="Sensor de nivel"></button></div>
+      <div class="toggle-row"><div class="toggle-label"><strong>Parada de emergencia</strong><small>Al activarse, deshabilita la salida</small></div><button class="switch" type="button" role="switch" aria-checked="false" data-input="emergency" aria-label="Parada de emergencia"></button></div>
+    </section>
+    <section class="panel"><div class="panel-heading"><div><h2>Señal de control (0–10 V)</h2><p id="signal-description">Circuito desenergizado.</p></div><strong id="signal-value">0.0 V</strong></div><div class="signal-bar"><span id="signal-fill" style="width:0%"></span></div></section>
+  </div>
+  <aside class="panel">
+    <div class="panel-heading"><div><h2>Salidas virtuales</h2><p>Resultado de la lógica de control.</p></div></div>
+    <div class="toggle-row"><div class="toggle-label"><strong>Relé K1</strong><small id="relay-state">En reposo</small></div><span class="status-pill" id="relay-pill">Apagado</span></div>
+    <div class="toggle-row"><div class="toggle-label"><strong>Motor M1</strong><small id="motor-state">Detenido</small></div><span class="status-pill" id="motor-pill">Apagado</span></div>
+    <div id="circuit-message" class="notice" style="margin-top:16px">Activa el interruptor principal y el sensor para energizar el circuito.</div>
+    <p class="subtle-text">Esquema lógico de demostración. No representa ni controla equipo eléctrico real.</p>
+  </aside>
+</div>
+</section>
+  <section class="practice-panel" id="electronics-panel-current" role="tabpanel" aria-labelledby="electronics-tab-current" data-practice-panel="current" hidden>
+    <div class="workspace-grid">
+      <section class="panel">
+        <div class="panel-heading"><div><h2>Escalamiento de transmisor 4–20 mA</h2><p>Convierte una corriente medida a una variable de proceso en un rango configurable.</p></div><span class="panel-tag">INSTRUMENTACIÓN</span></div>
+        <div class="field-grid">
+          <label class="field">Rango inferior de proceso<input id="instrument-low" type="number" step="any" value="0"></label>
+          <label class="field">Rango superior de proceso<input id="instrument-high" type="number" step="any" value="100"></label>
+          <label class="field">Corriente medida (mA)<input id="instrument-current" type="number" min="0" max="24" step="0.01" value="12"></label>
+          <label class="field">Unidad de ingeniería<input id="instrument-unit" type="text" maxlength="12" value="°C"></label>
+        </div>
+        <div class="form-actions"><button class="button button-dark" id="instrument-scale" type="button">Escalar señal →</button></div>
+        <div class="results-grid" id="instrument-results" aria-live="polite"></div>
+      </section>
+      <aside class="panel"><div class="panel-heading"><div><h2>Modelo lineal</h2></div></div>
+        <p class="subtle-text">Variable = LRV + (I − 4 mA) ÷ 16 mA × (URV − LRV).</p>
+        <p class="subtle-text">Corrientes fuera de 4–20 mA se muestran como fuera de rango del instrumento. En equipos reales verifica configuración, aislamiento, alimentación de lazo, resistencia de carga y hojas técnicas.</p>
+      </aside>
+    </div>
+  </section>
+  <section class="practice-panel" id="electronics-panel-components" role="tabpanel" aria-labelledby="electronics-tab-components" data-practice-panel="components" hidden>
+    <div class="workspace-grid">
+      <section class="panel">
+        <div class="panel-heading"><div><h2>Catálogo de componentes electrónicos</h2><p>Explora función, parámetros clave y comprobaciones habituales.</p></div><span class="panel-tag">ELECTRÓNICA</span></div>
+        <label class="field" for="electronics-component-select">Selecciona un componente
+          <select id="electronics-component-select">
+            <option value="resistor">Resistor</option>
+            <option value="capacitor">Capacitor</option>
+            <option value="diode">Diodo</option>
+            <option value="transistor">Transistor</option>
+            <option value="relay">Relé</option>
+          </select>
+        </label>
+        <div class="notice" id="electronics-component-info" aria-live="polite" style="margin-top:16px"></div>
+      </section>
+      <aside class="panel">
+        <div class="panel-heading"><div><h2>Práctica: resistor limitador para LED</h2><p>Calcula un valor teórico en un circuito de baja tensión simulado.</p></div></div>
+        <div class="field-grid">
+          <label class="field">Fuente (V)<input id="led-source-voltage" type="number" min="1" max="24" step="0.1" value="5"></label>
+          <label class="field">Caída del LED (V)<input id="led-forward-voltage" type="number" min="0.1" max="23.9" step="0.1" value="2"></label>
+          <label class="field">Corriente objetivo (mA)<input id="led-target-current" type="number" min="1" max="20" step="1" value="10"></label>
+        </div>
+        <div class="form-actions"><button class="button button-dark" id="led-resistor-calculate" type="button">Calcular resistor →</button></div>
+        <div class="notice" id="led-resistor-result" aria-live="polite">La práctica usa un modelo ideal; todavía no se han calculado valores.</div>
+        <p class="subtle-text">R = (Vfuente − VLED) ÷ I. Ejercicio exclusivamente formativo; no conectes circuitos físicos sin supervisión y revisión de potencia, tolerancias y especificaciones.</p>
+      </aside>
+    </div>
+  </section>
+  <section class="practice-panel" id="electronics-panel-ohm" role="tabpanel" aria-labelledby="electronics-tab-ohm" data-practice-panel="ohm" hidden>
+    <div class="workspace-grid">
+      <section class="panel">
+        <div class="panel-heading"><div><h2>Análisis resistivo de corriente continua</h2><p>Aplica la ley de Ohm y calcula la potencia disipada en una carga resistiva ideal.</p></div><span class="panel-tag">CIRCUITOS DC</span></div>
+        <div class="field-grid">
+          <label class="field">Tensión de alimentación (V)<input id="ohm-voltage" type="number" min="0" step="0.01" value="12"></label>
+          <label class="field">Resistencia de carga (Ω)<input id="ohm-resistance" type="number" min="0.01" step="0.01" value="220"></label>
+        </div>
+        <div class="form-actions"><button class="button button-dark" id="ohm-calculate" type="button">Calcular circuito →</button></div>
+        <div class="results-grid" id="ohm-results" aria-live="polite"></div>
+      </section>
+      <aside class="panel"><div class="panel-heading"><div><h2>Verificación técnica</h2></div></div>
+        <p class="subtle-text">I = V/R y P = V × I. Compara la potencia calculada con la potencia nominal del componente, considera tolerancias y aplica márgenes de diseño recomendados.</p>
+        <p class="subtle-text">Modelo ideal de baja tensión. No conectes montajes reales sin supervisión, protecciones y procedimientos de seguridad eléctrica.</p>
+      </aside>
+    </div>
+  </section>

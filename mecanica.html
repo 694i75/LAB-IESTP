@@ -1,0 +1,105 @@
+<section class="module-heading">
+  <span class="eyebrow">Laboratorio 03 · Gestión de taller</span>
+  <h1>Tablero de mantenimiento</h1>
+  <p>Practica gestión de mantenimiento, análisis de modos de falla y relaciones de transmisión mecánica.</p>
+</section>
+<div class="practice-tabs" role="tablist" aria-label="Prácticas profesionales de Mecánica">
+  <button type="button" role="tab" id="mechanics-tab-maintenance" aria-controls="mechanics-panel-maintenance" aria-selected="true" class="selected" data-practice-tab="maintenance">Mantenimiento industrial</button>
+  <button type="button" role="tab" id="mechanics-tab-fmea" aria-controls="mechanics-panel-fmea" aria-selected="false" data-practice-tab="fmea" tabindex="-1">Análisis FMEA</button>
+  <button type="button" role="tab" id="mechanics-tab-transmission" aria-controls="mechanics-panel-transmission" aria-selected="false" data-practice-tab="transmission" tabindex="-1">Transmisión mecánica</button>
+  <button type="button" role="tab" id="mechanics-tab-parts" aria-controls="mechanics-panel-parts" aria-selected="false" data-practice-tab="parts" tabindex="-1">Componentes e insumos</button>
+</div>
+<section class="practice-panel" id="mechanics-panel-maintenance" role="tabpanel" aria-labelledby="mechanics-tab-maintenance" data-practice-panel="maintenance">
+<div class="workspace-grid">
+  <div>
+    <section class="panel">
+      <div class="panel-heading"><div><h2>Inventario de repuestos</h2><p>Los cambios se reinician al salir de este laboratorio.</p></div><span class="panel-tag" id="inventory-count">0 elementos</span></div>
+      <form id="part-form">
+        <div class="field-grid">
+          <label class="field">Nombre del repuesto<input name="name" maxlength="50" placeholder="Ej. Rodamiento 6204" required></label>
+          <label class="field">Cantidad disponible<input name="quantity" type="number" min="0" max="9999" step="1" value="1" required></label>
+        </div>
+        <div class="form-actions"><button class="button button-dark" type="submit">Agregar repuesto +</button></div>
+      </form>
+      <div style="overflow-x:auto; margin-top:17px"><table class="data-table"><thead><tr><th>Repuesto</th><th>Stock</th><th>Estado</th><th>Acción</th></tr></thead><tbody id="parts-list"></tbody></table></div>
+    </section>
+  </div>
+  <aside>
+    <section class="panel">
+      <div class="panel-heading"><div><h2>Estimación preventiva</h2><p>Ejercicio de costo programado.</p></div></div>
+      <form id="maintenance-form">
+        <label class="field">Horas de mano de obra<input name="hours" type="number" min="0.5" max="500" step="0.5" value="4" required></label>
+        <label class="field" style="margin-top:12px">Tarifa por hora (S/)<input name="rate" type="number" min="1" max="1000" step="1" value="35" required></label>
+        <label class="field" style="margin-top:12px">Repuestos estimados (S/)<input name="parts" type="number" min="0" max="100000" step="1" value="120" required></label>
+        <div class="form-actions"><button class="button button-dark" type="submit">Calcular costo →</button></div>
+      </form>
+      <div class="metric" style="margin-top:15px"><span>Costo total estimado</span><strong id="maintenance-total">S/ 260.00</strong><small>Mano de obra + repuestos</small></div>
+      <p class="subtle-text">No incluye impuestos, costos indirectos ni cotizaciones comerciales.</p>
+    </section>
+  </aside>
+</div>
+</section>
+<section class="practice-panel" id="mechanics-panel-fmea" role="tabpanel" aria-labelledby="mechanics-tab-fmea" data-practice-panel="fmea" hidden>
+  <div class="workspace-grid">
+    <section class="panel">
+      <div class="panel-heading"><div><h2>Priorización de modo de falla</h2><p>Calcula el número de prioridad de riesgo (NPR) con escalas didácticas de 1 a 10.</p></div><span class="panel-tag">CONFIABILIDAD</span></div>
+      <div class="field-grid">
+        <label class="field">Severidad (1–10)<input id="fmea-severity" type="number" min="1" max="10" step="1" value="7"></label>
+        <label class="field">Ocurrencia (1–10)<input id="fmea-occurrence" type="number" min="1" max="10" step="1" value="4"></label>
+        <label class="field">Dificultad de detección (1–10)<input id="fmea-detection" type="number" min="1" max="10" step="1" value="6"></label>
+      </div>
+      <div class="form-actions"><button class="button button-dark" id="fmea-calculate" type="button">Calcular NPR →</button></div>
+      <div class="results-grid" id="fmea-results" aria-live="polite"></div>
+    </section>
+    <aside class="panel"><div class="panel-heading"><div><h2>Lectura del resultado</h2></div></div>
+      <p class="subtle-text">NPR = severidad × ocurrencia × detección. El valor ayuda a priorizar el análisis dentro del ejercicio; no sustituye la matriz de riesgos, los criterios de la organización ni el juicio del equipo multidisciplinario.</p>
+      <p class="subtle-text">Documenta modo y efecto de falla, controles actuales y acciones preventivas antes de cerrar un análisis real.</p>
+    </aside>
+  </div>
+</section>
+<section class="practice-panel" id="mechanics-panel-transmission" role="tabpanel" aria-labelledby="mechanics-tab-transmission" data-practice-panel="transmission" hidden>
+  <div class="workspace-grid">
+    <section class="panel">
+      <div class="panel-heading"><div><h2>Relación de transmisión por engranajes</h2><p>Estima velocidad y par ideal entre un piñón y una rueda conducida.</p></div><span class="panel-tag">DISEÑO MECÁNICO</span></div>
+      <div class="field-grid">
+        <label class="field">Dientes del engranaje conductor (z₁)<input id="gear-driver-teeth" type="number" min="1" step="1" value="20"></label>
+        <label class="field">Dientes del engranaje conducido (z₂)<input id="gear-driven-teeth" type="number" min="1" step="1" value="60"></label>
+        <label class="field">Velocidad de entrada (rpm)<input id="gear-input-speed" type="number" min="0.1" step="0.1" value="1500"></label>
+        <label class="field">Par de entrada (N·m)<input id="gear-input-torque" type="number" min="0" step="0.1" value="12"></label>
+      </div>
+      <div class="form-actions"><button class="button button-dark" id="gear-calculate" type="button">Analizar transmisión →</button></div>
+      <div class="results-grid" id="gear-results" aria-live="polite"></div>
+    </section>
+    <aside class="panel"><div class="panel-heading"><div><h2>Modelo ideal</h2></div></div>
+      <p class="subtle-text">Para un par de engranajes externos: n₂ = n₁ × z₁/z₂ y T₂ ideal = T₁ × z₂/z₁.</p>
+      <p class="subtle-text">No incluye pérdidas, eficiencia, geometría del diente, lubricación, cargas dinámicas, resistencia del material ni factores de servicio. Verifica el diseño con normas y especificaciones del fabricante.</p>
+    </aside>
+  </div>
+</section>
+<section class="practice-panel" id="mechanics-panel-parts" role="tabpanel" aria-labelledby="mechanics-tab-parts" data-practice-panel="parts" hidden>
+  <div class="workspace-grid">
+    <section class="panel">
+      <div class="panel-heading"><div><h2>Catálogo de componentes e insumos</h2><p>Identifica la función y los puntos de inspección antes de una intervención.</p></div><span class="panel-tag">TALLER MECÁNICO</span></div>
+      <label class="field" for="mechanics-component-select">Selecciona un componente o insumo
+        <select id="mechanics-component-select">
+          <option value="bearing">Rodamiento</option>
+          <option value="belt">Correa de transmisión</option>
+          <option value="filter">Filtro industrial</option>
+          <option value="lubricant">Lubricante</option>
+          <option value="coupling">Acoplamiento</option>
+        </select>
+      </label>
+      <div class="notice" id="mechanics-component-info" aria-live="polite" style="margin-top:16px"></div>
+    </section>
+    <aside class="panel">
+      <div class="panel-heading"><div><h2>Ejercicio de planificación</h2><p>Compara el horómetro con un intervalo hipotético.</p></div></div>
+      <div class="field-grid">
+        <label class="field">Horas actuales de operación<input id="maintenance-hours-current" type="number" min="0" step="1" value="720"></label>
+        <label class="field">Intervalo de revisión (horas)<input id="maintenance-hours-interval" type="number" min="1" step="1" value="1000"></label>
+      </div>
+      <div class="form-actions"><button class="button button-dark" id="maintenance-schedule-check" type="button">Revisar intervalo →</button></div>
+      <div class="notice" id="maintenance-schedule-result" aria-live="polite">Ingresa datos para practicar la planificación.</div>
+      <p class="subtle-text">Intervalo solo didáctico. En equipos reales, aplica manuales del fabricante, historial de condición, criticidad y procedimientos de bloqueo/etiquetado.</p>
+    </aside>
+  </div>
+</section>

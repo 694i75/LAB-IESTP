@@ -1,0 +1,99 @@
+<section class="module-heading">
+  <span class="eyebrow">Laboratorio 02 · Telemetría</span>
+  <h1>Estación agroclimática</h1>
+  <p>Interpreta datos agroclimáticos y desarrolla ejercicios de programación de riego y dosificación técnica.</p>
+</section>
+<div class="practice-tabs" role="tablist" aria-label="Prácticas profesionales de Agropecuaria">
+  <button type="button" role="tab" id="agro-tab-telemetry" aria-controls="agro-panel-telemetry" aria-selected="true" class="selected" data-practice-tab="telemetry">Telemetría y heladas</button>
+  <button type="button" role="tab" id="agro-tab-irrigation" aria-controls="agro-panel-irrigation" aria-selected="false" data-practice-tab="irrigation" tabindex="-1">Programación de riego</button>
+  <button type="button" role="tab" id="agro-tab-fertilizer" aria-controls="agro-panel-fertilizer" aria-selected="false" data-practice-tab="fertilizer" tabindex="-1">Dosificación de nutrientes</button>
+  <button type="button" role="tab" id="agro-tab-products" aria-controls="agro-panel-products" aria-selected="false" data-practice-tab="products" tabindex="-1">Productos y medicamentos</button>
+</div>
+<section class="practice-panel" id="agro-panel-telemetry" role="tabpanel" aria-labelledby="agro-tab-telemetry" data-practice-panel="telemetry">
+<div class="workspace-grid">
+  <div>
+    <section class="panel">
+      <div class="panel-heading"><div><h2>Lecturas de sensores</h2><p>Valores demostrativos que se actualizan localmente.</p></div><span class="panel-tag"><span class="live-dot"></span> EN VIVO</span></div>
+      <div class="results-grid" id="sensor-metrics"></div>
+      <div class="form-actions"><button class="button button-dark" id="refresh-sensors" type="button">Actualizar lecturas ↻</button><span class="form-hint" id="sensor-updated"></span></div>
+    </section>
+    <section class="panel">
+      <div class="panel-heading"><div><h2>Historial reciente</h2><p>Últimas lecturas simuladas.</p></div></div>
+      <div style="overflow-x:auto"><table class="data-table"><thead><tr><th>Hora</th><th>Temperatura</th><th>Humedad</th><th>Estado</th></tr></thead><tbody id="sensor-history"></tbody></table></div>
+    </section>
+  </div>
+  <aside>
+    <section class="panel"><div class="panel-heading"><div><h2>Centro de alertas</h2><p>Umbrales didácticos editables.</p></div></div>
+      <label class="field">Alerta de temperatura bajo (°C)<input id="frost-threshold" type="number" min="-10" max="15" step="0.5" value="3"></label>
+      <div id="weather-alert" class="notice" style="margin-top:14px"></div>
+      <p class="subtle-text">El umbral no sustituye pronósticos, observación en campo ni protocolos agronómicos locales.</p>
+    </section>
+    <section class="panel"><div class="panel-heading"><div><h2>Variables monitoreadas</h2></div></div><p class="subtle-text">La temperatura y humedad son generadas en el navegador. No hay conexión con sensores físicos ni servicio meteorológico.</p></section>
+  </aside>
+</div>
+</section>
+  <section class="practice-panel" id="agro-panel-irrigation" role="tabpanel" aria-labelledby="agro-tab-irrigation" data-practice-panel="irrigation" hidden>
+    <div class="workspace-grid">
+      <section class="panel">
+        <div class="panel-heading"><div><h2>Balance simplificado de riego</h2><p>Estima la lámina neta y el volumen bruto a partir de ETo, Kc, área y eficiencia.</p></div><span class="panel-tag">GESTIÓN HÍDRICA</span></div>
+        <div class="field-grid">
+          <label class="field">ETo diaria (mm/día)<input id="agro-eto" type="number" min="0" max="20" step="0.1" value="4.2"></label>
+          <label class="field">Coeficiente de cultivo Kc<input id="agro-kc" type="number" min="0" max="2" step="0.01" value="0.85"></label>
+          <label class="field">Área del sector (ha)<input id="agro-area" type="number" min="0.01" step="0.01" value="2"></label>
+          <label class="field">Eficiencia de aplicación (%)<input id="agro-efficiency" type="number" min="1" max="100" step="1" value="80"></label>
+        </div>
+        <div class="form-actions"><button class="button button-dark" id="agro-irrigation-calculate" type="button">Calcular requerimiento →</button></div>
+        <div class="results-grid" id="agro-irrigation-results" aria-live="polite"></div>
+      </section>
+      <aside class="panel"><div class="panel-heading"><div><h2>Modelo y límites</h2></div></div>
+        <p class="subtle-text">ETc = ETo × Kc. Lámina bruta = ETc ÷ eficiencia. Para 1 ha, 1 mm de lámina equivale a 10 m³.</p>
+        <p class="subtle-text">El ejercicio no considera lluvia efectiva, almacenamiento del suelo, etapa fenológica, salinidad ni restricciones hidráulicas. Contrasta con mediciones de campo y recomendaciones agronómicas locales.</p>
+      </aside>
+    </div>
+  </section>
+  <section class="practice-panel" id="agro-panel-fertilizer" role="tabpanel" aria-labelledby="agro-tab-fertilizer" data-practice-panel="fertilizer" hidden>
+    <div class="workspace-grid">
+      <section class="panel">
+        <div class="panel-heading"><div><h2>Cálculo de producto fertilizante</h2><p>Convierte una dosis objetivo de nutriente en masa de producto para un área determinada.</p></div><span class="panel-tag">NUTRICIÓN VEGETAL</span></div>
+        <div class="field-grid">
+          <label class="field">Dosis objetivo del nutriente (kg/ha)<input id="agro-nutrient-rate" type="number" min="0" step="0.1" value="60"></label>
+          <label class="field">Concentración del nutriente en producto (%)<input id="agro-product-grade" type="number" min="0.1" max="100" step="0.1" value="46"></label>
+          <label class="field">Superficie a tratar (ha)<input id="agro-fertilizer-area" type="number" min="0.01" step="0.01" value="1.5"></label>
+        </div>
+        <div class="form-actions"><button class="button button-dark" id="agro-fertilizer-calculate" type="button">Calcular masa de producto →</button></div>
+        <div class="results-grid" id="agro-fertilizer-results" aria-live="polite"></div>
+      </section>
+      <aside class="panel"><div class="panel-heading"><div><h2>Uso responsable</h2></div></div>
+        <p class="subtle-text">Masa de producto = dosis de nutriente ÷ fracción másica del nutriente × superficie.</p>
+        <p class="subtle-text">La dosis ingresada es hipotética. No constituye una recomendación de fertilización; define el plan con análisis de suelo/tejido, requerimientos del cultivo, normativa y asesoría profesional.</p>
+      </aside>
+    </div>
+  </section>
+  <section class="practice-panel" id="agro-panel-products" role="tabpanel" aria-labelledby="agro-tab-products" data-practice-panel="products" hidden>
+    <div class="workspace-grid">
+      <section class="panel">
+        <div class="panel-heading"><div><h2>Catálogo de productos agropecuarios</h2><p>Consulta ejemplos para aprender a identificar su finalidad y los datos de su etiqueta.</p></div><span class="panel-tag">CONSULTA DIDÁCTICA</span></div>
+        <div class="field-grid">
+          <label class="field">Categoría
+            <select id="agro-product-category">
+              <option value="fertilizer">Fertilizantes</option>
+              <option value="crop-protection">Protección vegetal</option>
+              <option value="veterinary">Medicamentos veterinarios</option>
+            </select>
+          </label>
+          <label class="field">Producto o familia
+            <select id="agro-product-select"></select>
+          </label>
+        </div>
+        <div class="notice" id="agro-product-info" aria-live="polite" style="margin-top:16px"></div>
+      </section>
+      <aside class="panel"><div class="panel-heading"><div><h2>Lectura responsable de etiquetas</h2></div></div>
+        <ul class="subtle-text">
+          <li>Verifica registro, especie o cultivo autorizado, ingrediente activo y fecha de vencimiento.</li>
+          <li>Revisa riesgos, equipo de protección, almacenamiento y disposición del envase.</li>
+          <li>Medicamentos: seguir la indicación de un profesional veterinario y los periodos de retiro.</li>
+        </ul>
+        <p class="subtle-text">Los ejemplos son educativos: no contienen dosis ni recomiendan tratamientos. Consulta SENASA, la etiqueta vigente y asesoría profesional antes de cualquier uso real.</p>
+      </aside>
+    </div>
+  </section>

@@ -1,0 +1,106 @@
+<section class="module-heading">
+  <span class="eyebrow">Laboratorio 01 · Caracterización geológica</span>
+  <h1>Analiza una muestra de roca</h1>
+  <p>Desarrolla ejercicios técnicos de caracterización, control de calidad de muestreo y estimación geométrica de recursos.</p>
+</section>
+<div class="practice-tabs" role="tablist" aria-label="Prácticas profesionales de Minería">
+  <button type="button" role="tab" id="mining-tab-density" aria-controls="mining-panel-density" aria-selected="true" class="selected" data-practice-tab="density">Caracterización</button>
+  <button type="button" role="tab" id="mining-tab-qaqc" aria-controls="mining-panel-qaqc" aria-selected="false" data-practice-tab="qaqc" tabindex="-1">QA/QC de muestreo</button>
+  <button type="button" role="tab" id="mining-tab-resource" aria-controls="mining-panel-resource" aria-selected="false" data-practice-tab="resource" tabindex="-1">Estimación geométrica</button>
+  <button type="button" role="tab" id="mining-tab-minerals" aria-controls="mining-panel-minerals" aria-selected="false" data-practice-tab="minerals" tabindex="-1">Minerales y usos</button>
+</div>
+<section class="practice-panel" id="mining-panel-density" role="tabpanel" aria-labelledby="mining-tab-density" data-practice-panel="density">
+  <div class="workspace-grid">
+    <div>
+      <section class="panel">
+        <div class="panel-heading"><div><h2>Datos de la muestra</h2><p>Usa unidades consistentes para obtener una comparación útil.</p></div><span class="panel-tag">SIMULACIÓN</span></div>
+        <form id="sample-form">
+          <div class="field-grid">
+            <label class="field">Tipo de roca<select name="rock" id="rock-select"></select></label>
+            <label class="field">Masa de la muestra (t)<input name="mass" type="number" min="0.01" max="100" step="0.01" value="2.65" required></label>
+            <label class="field">Volumen de la muestra (m³)<input name="volume" type="number" min="0.01" max="30" step="0.01" value="1" required></label>
+          </div>
+          <div class="form-actions"><button class="button button-dark" type="submit">Analizar muestra →</button><span class="form-hint">Cálculo de densidad: masa ÷ volumen</span></div>
+        </form>
+      </section>
+      <section class="panel">
+        <div class="panel-heading"><div><h2>Comparación de referencia</h2><p id="sample-summary">Ingresa los datos para ver el análisis.</p></div></div>
+        <div class="results-grid" id="sample-results"></div>
+      </section>
+    </div>
+    <aside class="panel">
+      <div class="panel-heading"><div><h2>Referencia geológica</h2><p>Perfiles didácticos, no son datos de una mina.</p></div></div>
+      <div id="rock-info" class="notice"></div>
+      <p class="subtle-text" style="margin-top:14px">Las propiedades reales varían según composición, porosidad y humedad; se determinan con muestreo y ensayos de laboratorio.</p>
+    </aside>
+  </div>
+</section>
+<section class="practice-panel" id="mining-panel-qaqc" role="tabpanel" aria-labelledby="mining-tab-qaqc" data-practice-panel="qaqc" hidden>
+  <div class="workspace-grid">
+    <section class="panel">
+      <div class="panel-heading"><div><h2>Control de duplicados de ley</h2><p>Compara una muestra original con su duplicado de campo para revisar la precisión relativa.</p></div><span class="panel-tag">QA/QC</span></div>
+      <div class="field-grid">
+        <label class="field">Ley original (%)<input id="mining-grade-original" type="number" min="0.01" max="100" step="0.01" value="2.40"></label>
+        <label class="field">Ley del duplicado (%)<input id="mining-grade-duplicate" type="number" min="0.01" max="100" step="0.01" value="2.28"></label>
+        <label class="field">Diferencia relativa máxima (%)<input id="mining-grade-tolerance" type="number" min="0.1" max="100" step="0.1" value="10"></label>
+      </div>
+      <div class="form-actions"><button class="button button-dark" id="mining-qaqc-check" type="button">Evaluar duplicado →</button></div>
+      <div class="notice" id="mining-qaqc-result" aria-live="polite">Ingresa resultados analíticos de ejemplo para calcular la diferencia relativa.</div>
+    </section>
+    <aside class="panel"><div class="panel-heading"><div><h2>Criterio de interpretación</h2></div></div>
+      <p class="subtle-text">Diferencia relativa = |duplicado − original| ÷ promedio × 100. El límite se usa solo como umbral didáctico; en QA/QC real, los criterios dependen del tipo de material, método analítico, laboratorio y protocolo aprobado.</p>
+      <p class="subtle-text">Esta práctica no valida certificados ni reemplaza revisión geológica, cadena de custodia o análisis estadístico.</p>
+    </aside>
+  </div>
+</section>
+<section class="practice-panel" id="mining-panel-resource" role="tabpanel" aria-labelledby="mining-tab-resource" data-practice-panel="resource" hidden>
+  <div class="workspace-grid">
+    <section class="panel">
+      <div class="panel-heading"><div><h2>Estimación geométrica de un bloque</h2><p>Calcula volumen, tonelaje in situ y metal contenido a partir de parámetros hipotéticos.</p></div><span class="panel-tag">RECURSOS</span></div>
+      <div class="field-grid">
+        <label class="field">Área proyectada (m²)<input id="mining-block-area" type="number" min="1" step="1" value="1200"></label>
+        <label class="field">Potencia media (m)<input id="mining-block-thickness" type="number" min="0.1" step="0.1" value="4.5"></label>
+        <label class="field">Densidad aparente (t/m³)<input id="mining-block-density" type="number" min="0.1" step="0.01" value="2.65"></label>
+        <label class="field">Ley media (%)<input id="mining-block-grade" type="number" min="0" max="100" step="0.01" value="1.2"></label>
+      </div>
+      <div class="form-actions"><button class="button button-dark" id="mining-block-calculate" type="button">Calcular estimación →</button></div>
+      <div class="results-grid" id="mining-block-results" aria-live="polite"></div>
+    </section>
+    <aside class="panel"><div class="panel-heading"><div><h2>Alcance de la estimación</h2></div></div>
+      <p class="subtle-text">Estimación simplificada: volumen = área × potencia; tonelaje = volumen × densidad; metal contenido = tonelaje × ley.</p>
+      <p class="subtle-text">No incluye continuidad geológica, dilución, recuperación, clasificación de recursos, incertidumbre ni factores modificadores. No es una estimación de reservas ni debe usarse para decisiones económicas.</p>
+    </aside>
+  </div>
+</section>
+<section class="practice-panel" id="mining-panel-minerals" role="tabpanel" aria-labelledby="mining-tab-minerals" data-practice-panel="minerals" hidden>
+  <div class="workspace-grid">
+    <section class="panel">
+      <div class="panel-heading"><div><h2>Catálogo didáctico de minerales</h2><p>Explora propiedades diagnósticas, composición y aplicaciones comunes.</p></div><span class="panel-tag">MINERALOGÍA</span></div>
+      <label class="field" for="mining-mineral-select">Selecciona un mineral
+        <select id="mining-mineral-select">
+          <option value="chalcopyrite">Calcopirita</option>
+          <option value="bornite">Bornita</option>
+          <option value="quartz">Cuarzo</option>
+          <option value="pyrite">Pirita</option>
+          <option value="galena">Galena</option>
+        </select>
+      </label>
+      <div class="notice" id="mining-mineral-info" aria-live="polite" style="margin-top:16px"></div>
+    </section>
+    <aside class="panel"><div class="panel-heading"><div><h2>Reto de identificación</h2><p>Selecciona el mineral que suele presentar brillo metálico dorado y raya oscura verdosa.</p></div></div>
+      <label class="field" for="mining-mineral-answer">Tu respuesta
+        <select id="mining-mineral-answer">
+          <option value="">Seleccionar mineral</option>
+          <option value="chalcopyrite">Calcopirita</option>
+          <option value="bornite">Bornita</option>
+          <option value="quartz">Cuarzo</option>
+          <option value="pyrite">Pirita</option>
+          <option value="galena">Galena</option>
+        </select>
+      </label>
+      <div class="form-actions"><button class="button button-dark" id="mining-mineral-check" type="button">Comprobar respuesta →</button></div>
+      <div class="notice" id="mining-mineral-answer-result" aria-live="polite">Compara brillo, color, raya y dureza; son propiedades de apoyo, no una identificación concluyente.</div>
+      <p class="subtle-text">No manipules muestras desconocidas ni realices pruebas destructivas sin supervisión y protocolos de laboratorio.</p>
+    </aside>
+  </div>
+</section>

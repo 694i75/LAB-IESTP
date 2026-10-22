@@ -1,0 +1,124 @@
+<section class="module-heading">
+  <span class="eyebrow">Administración de Plataformas y Servicios de Tecnologías de la Información</span>
+  <h1>APSTI · Laboratorio de soporte e infraestructura</h1>
+  <p>Practica tareas habituales de soporte TI, ofimática, ensamblaje y cableado estructurado en actividades guiadas.</p>
+</section>
+<div class="practice-tabs" role="tablist" aria-label="Prácticas profesionales APSTI">
+  <button type="button" role="tab" id="practice-tab-office" aria-controls="practice-panel-office" aria-selected="true" class="selected" data-practice-tab="office">Ofimática</button>
+  <button type="button" role="tab" id="practice-tab-assembly" aria-controls="practice-panel-assembly" aria-selected="false" data-practice-tab="assembly" tabindex="-1">Ensamblaje</button>
+  <button type="button" role="tab" id="practice-tab-cabling" aria-controls="practice-panel-cabling" aria-selected="false" data-practice-tab="cabling" tabindex="-1">Cableado estructurado</button>
+  <button type="button" role="tab" id="practice-tab-terminal" aria-controls="practice-panel-terminal" aria-selected="false" data-practice-tab="terminal" tabindex="-1">Sistemas y redes</button>
+  <button type="button" role="tab" id="practice-tab-services" aria-controls="practice-panel-services" aria-selected="false" data-practice-tab="services" tabindex="-1">Servicios y subredes</button>
+</div>
+<section class="practice-panel" id="practice-panel-office" role="tabpanel" aria-labelledby="practice-tab-office" data-practice-panel="office">
+  <div class="workspace-grid">
+    <section class="panel">
+      <div class="panel-heading"><div><h2>Hoja de costos de soporte técnico</h2><p>Construye fórmulas de hoja de cálculo para documentar una orden de servicio.</p></div><span class="panel-tag">OFIMÁTICA</span></div>
+      <div class="field-grid">
+        <label class="field">Mano de obra (S/)<input id="office-labor" type="number" min="0" step="0.01" value="200"></label>
+        <label class="field">Repuestos (S/)<input id="office-parts" type="number" min="0" step="0.01" value="350"></label>
+        <label class="field">Insumos (S/)<input id="office-supplies" type="number" min="0" step="0.01" value="70"></label>
+      </div>
+      <div class="form-actions"><button class="button button-dark" id="office-calculate" type="button">Calcular orden ↗</button></div>
+      <div class="results-grid" id="office-results" aria-live="polite"></div>
+    </section>
+    <aside class="panel">
+      <div class="panel-heading"><div><h2>Fórmulas de referencia</h2><p>Equivalentes para una hoja de cálculo en español.</p></div></div>
+      <p class="subtle-text"><code>=SUMA(B2:B4)</code> · subtotal de mano de obra, repuestos e insumos</p>
+      <p class="subtle-text"><code>=B5*18%</code> · cálculo referencial del IGV</p>
+      <p class="subtle-text"><code>=B5+B6</code> · total de la orden</p>
+      <p class="subtle-text">El ejercicio es formativo: verifica tasas y reglas contables vigentes antes de emitir documentos reales.</p>
+    </aside>
+  </div>
+</section>
+<section class="practice-panel" id="practice-panel-services" role="tabpanel" aria-labelledby="practice-tab-services" data-practice-panel="services" hidden>
+  <div class="workspace-grid">
+    <section class="panel">
+      <div class="panel-heading"><div><h2>Catálogo de servicios TI</h2><p>Consulta conceptos de infraestructura y operación de plataformas.</p></div><span class="panel-tag">APSTI</span></div>
+      <label class="field" for="apsti-service-select">Selecciona un servicio o tecnología
+        <select id="apsti-service-select">
+          <option value="dhcp">DHCP</option>
+          <option value="dns">DNS</option>
+          <option value="backup">Copias de seguridad</option>
+          <option value="virtualization">Virtualización</option>
+          <option value="database">Base de datos</option>
+        </select>
+      </label>
+      <div class="notice" id="apsti-service-info" aria-live="polite" style="margin-top:16px"></div>
+    </section>
+    <aside class="panel">
+      <div class="panel-heading"><div><h2>Práctica: capacidad de una subred IPv4</h2><p>Estima direcciones de host disponibles a partir del prefijo CIDR.</p></div></div>
+      <label class="field" for="apsti-subnet-prefix">Prefijo (CIDR)
+        <select id="apsti-subnet-prefix">
+          <option value="24">/24 · red pequeña</option>
+          <option value="25">/25</option>
+          <option value="26">/26</option>
+          <option value="27">/27</option>
+          <option value="28">/28</option>
+          <option value="29">/29</option>
+          <option value="30">/30 · enlace punto a punto</option>
+        </select>
+      </label>
+      <div class="form-actions"><button class="button button-dark" id="apsti-subnet-calculate" type="button">Calcular capacidad →</button></div>
+      <div class="notice" id="apsti-subnet-result" aria-live="polite">Selecciona un prefijo para iniciar el ejercicio.</div>
+      <p class="subtle-text">Cálculo local para aprendizaje: 2^(32 − prefijo) − 2 direcciones de host en subredes IPv4 convencionales. No consulta ni modifica redes reales.</p>
+    </aside>
+  </div>
+</section>
+<section class="practice-panel" id="practice-panel-assembly" role="tabpanel" aria-labelledby="practice-tab-assembly" data-practice-panel="assembly" hidden>
+  <div class="workspace-grid">
+    <section class="panel">
+      <div class="panel-heading"><div><h2>Compatibilidad de estación de trabajo</h2><p>Valida socket, generación de memoria y margen de potencia antes del ensamblaje.</p></div><span class="panel-tag">HARDWARE</span></div>
+      <div class="field-grid">
+        <label class="field">Socket del procesador<select id="assembly-cpu"><option value="AM4">AMD AM4</option><option value="AM5">AMD AM5</option><option value="LGA1700">Intel LGA1700</option></select></label>
+        <label class="field">Socket de la placa<select id="assembly-board-socket"><option value="AM4">AMD AM4</option><option value="AM5">AMD AM5</option><option value="LGA1700">Intel LGA1700</option></select></label>
+        <label class="field">Memoria de la placa<select id="assembly-board-ram"><option value="DDR4">DDR4</option><option value="DDR5">DDR5</option></select></label>
+        <label class="field">Memoria seleccionada<select id="assembly-ram"><option value="DDR4">DDR4</option><option value="DDR5">DDR5</option></select></label>
+        <label class="field">Consumo estimado del equipo (W)<input id="assembly-load" type="number" min="100" max="1500" step="25" value="450"></label>
+        <label class="field">Fuente de alimentación (W)<select id="assembly-psu"><option value="450">450 W</option><option value="550">550 W</option><option value="650" selected>650 W</option><option value="750">750 W</option><option value="850">850 W</option></select></label>
+      </div>
+      <div class="form-actions"><button class="button button-dark" id="assembly-check" type="button">Validar compatibilidad →</button></div>
+      <div class="notice" id="assembly-result" aria-live="polite">Selecciona los componentes y valida la configuración.</div>
+    </section>
+    <aside class="panel"><div class="panel-heading"><div><h2>Procedimiento de taller</h2></div></div>
+      <p class="subtle-text">Confirma el manual de la placa, compatibilidad de CPU/RAM, capacidad térmica y conectores de alimentación.</p>
+      <p class="subtle-text">Aplica protección ESD, desconecta la alimentación y sigue las indicaciones del fabricante. Los valores de este ejercicio son estimaciones didácticas.</p>
+    </aside>
+  </div>
+</section>
+<section class="practice-panel" id="practice-panel-cabling" role="tabpanel" aria-labelledby="practice-tab-cabling" data-practice-panel="cabling" hidden>
+  <div class="workspace-grid">
+    <section class="panel">
+      <div class="panel-heading"><div><h2>Secuencia de terminación T568B</h2><p>Ordena los conductores para practicar el código de colores de un enlace Ethernet.</p></div><span class="panel-tag">INFRAESTRUCTURA</span></div>
+      <div class="field-grid cable-sequence" id="cable-sequence"></div>
+      <div class="form-actions"><button class="button button-dark" id="cable-check" type="button">Comprobar secuencia →</button><button class="button button-outline" id="cable-reset" type="button">Restablecer</button></div>
+      <div class="notice" id="cable-result" aria-live="polite">Selecciona el conductor correspondiente a cada pin.</div>
+    </section>
+    <aside class="panel"><div class="panel-heading"><div><h2>Buenas prácticas</h2></div></div>
+      <p class="subtle-text">La secuencia T568B del ejercicio corresponde a un extremo de un patch cord directo. Para una instalación certificada, valida categoría, longitud, radio de curvatura, terminación y medición con las normas aplicables.</p>
+      <p class="subtle-text">La actividad no mide ni certifica cableado físico. Consulta normas y documentación actualizadas en las fuentes técnicas de la ruta APSTI.</p>
+    </aside>
+  </div>
+</section>
+<section class="practice-panel" id="practice-panel-terminal" role="tabpanel" aria-labelledby="practice-tab-terminal" data-practice-panel="terminal" hidden>
+  <div class="workspace-grid">
+    <div class="terminal">
+      <div class="terminal-bar"><span></span><span></span><span></span><strong>estudiante@laboratorio: ~</strong></div>
+      <div class="terminal-output" id="terminal-output" role="log" aria-live="polite"></div>
+      <form class="terminal-form" id="terminal-form"><input class="terminal-input" id="terminal-input" autocomplete="off" spellcheck="false" aria-label="Comando de práctica" placeholder="Escribe help para ver comandos"><button class="button button-light" type="submit">Ejecutar</button></form>
+    </div>
+    <aside>
+      <section class="panel"><div class="panel-heading"><div><h2>Comandos del laboratorio</h2><p>Prácticas de consola aisladas.</p></div></div>
+        <p class="subtle-text"><code>help</code> · consultar comandos disponibles</p>
+        <p class="subtle-text"><code>status</code> · revisar indicadores de servicio</p>
+        <p class="subtle-text"><code>ipconfig</code> · consultar una configuración de red ficticia</p>
+        <p class="subtle-text"><code>ping &lt;host&gt;</code> · interpretar una respuesta simulada</p>
+        <p class="subtle-text"><code>docker ps</code> · revisar contenedores de práctica</p>
+        <p class="subtle-text"><code>docker run &lt;nombre&gt;</code> · crear un servicio ficticio</p>
+        <p class="subtle-text"><code>docker stop &lt;nombre&gt;</code> · detener el servicio de práctica</p>
+        <p class="subtle-text"><code>clear</code> · limpiar la consola</p>
+      </section>
+      <section class="panel"><div class="panel-heading"><div><h2>Alcance del simulador</h2></div></div><p class="subtle-text">Los comandos son interpretados en esta página; no se ejecuta software local, no se conecta a redes reales y no controla equipos.</p></section>
+    </aside>
+  </div>
+</section>

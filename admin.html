@@ -1,0 +1,27 @@
+<section class="module-heading">
+  <span class="eyebrow">Área de administración</span>
+  <h1>Panel de administración</h1>
+  <p>Gestión de estudiantes y recursos académicos.</p>
+</section>
+<section class="admin-stats" id="admin-stats" aria-label="Resumen de actividad"></section>
+<section class="panel admin-panel" aria-labelledby="students-heading">
+  <div class="panel-heading"><div><h2 id="students-heading">Gestión de estudiantes</h2><p>Administra los registros académicos.</p></div></div>
+  <form class="admin-form student-form" id="student-form">
+    <label class="field">Nombre visible<input name="name" maxlength="60" placeholder="Nombre de estudiante" required></label>
+    <label class="field">Código de estudiante<input name="code" maxlength="24" placeholder="Código temporal" required></label>
+    <label class="field">Carrera<select name="career" required><option value="Minería">Minería</option><option value="Agropecuaria">Agropecuaria</option><option value="Mecánica">Mecánica</option><option value="Electrónica">Electrónica</option><option value="APSTI">APSTI</option></select></label>
+    <button class="button button-dark" type="submit">Agregar estudiante +</button>
+  </form>
+  <div class="admin-table-wrap"><table class="data-table admin-table"><thead><tr><th>Estudiante</th><th>Código</th><th>Carrera</th><th>Acción</th></tr></thead><tbody id="students-list"></tbody></table></div>
+</section>
+<section class="panel admin-panel" aria-labelledby="resources-heading">
+  <div class="panel-heading"><div><h2 id="resources-heading">Guías y recursos</h2><p>Organiza bibliografía y fuentes por carrera y año formativo.</p></div></div>
+  <form class="admin-form resource-form" id="resource-form">
+    <label class="field">Título del recurso<input name="title" maxlength="80" placeholder="Título de guía o material" required></label>
+    <label class="field">Carrera<select name="career" required><option value="Minería">Minería</option><option value="Agropecuaria">Agropecuaria</option><option value="Mecánica">Mecánica</option><option value="Electrónica">Electrónica</option><option value="APSTI">APSTI</option></select></label>
+    <label class="field">Año formativo<select name="year" required><option value="1">Año 1</option><option value="2">Año 2</option><option value="3">Año 3</option></select></label>
+    <label class="field">Enlace web<input name="url" type="url" maxlength="500" placeholder="https://sitio-oficial.edu/" required></label>
+    <button class="button button-dark" type="submit">Agregar recurso +</button>
+  </form>
+  <div class="admin-table-wrap"><table class="data-table admin-table"><thead><tr><th>Recurso</th><th>Carrera</th><th>Año</th><th>Acción</th></tr></thead><tbody id="resources-list"></tbody></table></div>
+</section>
